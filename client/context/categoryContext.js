@@ -1,0 +1,71 @@
+import { createContext, useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import { useProductContext } from './productContext';
+
+axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.withCredentials = true;
+
+const CategoryContext = createContext();
+
+export const CategoryContextProvider = ({ children }) => {
+    const { product } = useProductContext()
+    const [allCategories, setCategories] = useState([]);
+    const [category, setCategory] = useState(null);
+    const [categoryById, setCategoryById] = useState({})
+    const [loading, setLoading] = useState(false);
+
+    const categoryId = product?.category;
+
+    const getCategories = async () => {
+        setLoading(true);
+        try {
+            const response = await axios.get('/api/v1/all-categories');
+            if (Array.isArray(response.data)) {
+                setCategories(response.data);
+            } else {
+                console.error('La respuesta de la API no es un arreglo:', response.data);
+                setCategories([]); // Si no es un arreglo, establece un arreglo vacío
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const getCategoryById = async (categoryId) => {
+        setLoading(true);
+        try {
+            const response = await axios.get(`/api/v1/category/${categoryId}`);
+            setCategoryById(response.data);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error al obtener la categoría:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+   
+    useEffect(() => {
+        getCategories();
+    }, []);
+
+    useEffect(() => {
+        if (categoryId) {
+            getCategoryById(categoryId);
+        }
+    }, [categoryId]);
+    
+
+
+    return (
+        <CategoryContext.Provider value={{ allCategories, category, loading, categoryById ,setLoading}}>
+            {children}
+        </CategoryContext.Provider>
+    );
+};
+
+export const useCategoryContext = () => {
+    return useContext(CategoryContext);
+};
