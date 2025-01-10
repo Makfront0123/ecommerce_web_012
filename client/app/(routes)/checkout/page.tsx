@@ -1,13 +1,13 @@
 "use client"
-import { Button } from '@/components/ui/button'
+
 import { Separator } from '@/components/ui/separator'
 import { useOrderContext } from '@/context/orderContext'
 import { UseCart } from '@/hooks/useCart'
 import Image from 'next/image'
-import { Icon } from '@iconify/react'
+
 import { usePathname } from 'next/navigation'
 import React, { useState } from 'react'
-import { Checkbox } from "@/components/ui/checkbox"
+
 import { useGlobalContext } from '@/context/globalContext'
 import toast from 'react-hot-toast'
 import DialogLoading from '@/components/DialogLoading'
@@ -21,10 +21,10 @@ const Checkout = () => {
     const path = pathname.split('/');
     const [address, setAddress] = useState('');
     const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
+    
     const [paymentMethod, setPaymentMethod] = useState<string>('');
     const { createOrder, loading } = useOrderContext();
-    const { items, removeAll } = UseCart();
+    const { items } = UseCart();
 
     const total = items.reduce((total, item) => total + item.price * item.quantity, 0);
 
