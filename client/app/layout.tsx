@@ -28,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
         <Script
           src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"
           strategy="afterInteractive"
@@ -36,13 +37,10 @@ export default function RootLayout({
       <body
         className={`${poppins.className} antialiased`}
       >
-        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
         <Toaster position="top-center" toastOptions={{ duration: 2000 }} />
         <ContextProvider>
           <Header />
-
-          {
-            children}
+          {children}
         </ContextProvider>
         <Footer />
       </body>

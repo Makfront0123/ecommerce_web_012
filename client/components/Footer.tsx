@@ -64,8 +64,8 @@ export const Footer = () => {
                     </div>
                     <div className="flex items-center justify-center gap-x-5">
                         {
-                            socialIcons.map((item) => (
-                                <Icon icon={item.icon} width="24" height="24" />
+                            socialIcons.map((item,index) => (
+                                <Icon key={index} icon={item.icon} width="24" height="24" />
                             ))
                         }
                     </div>

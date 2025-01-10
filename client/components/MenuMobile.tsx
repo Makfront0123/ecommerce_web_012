@@ -1,5 +1,5 @@
 'use client';
-import { navLinks, navLinksMobile } from '@/models/models';
+import { navLinksMobile } from '@/models/models';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -23,7 +23,7 @@ function MenuMobile() {
 
             {isOpen && (
                 <nav className="fixed animate-slide-in-left after:animate-slide-in-right top-0 left-0 min-w-[35vh] z-40 h-full bg-[#f7f7f7] shadow-md p-10 flex flex-col gap-y-6">
-                    {navLinksMobile.map((item: any) => (
+                    {navLinksMobile.map((item:{id:number,title:string,href:string}) => (
                         <Link key={item.id} href={item.href}>
                             <span className="font-medium cursor-pointer hover:opacity-30 duration-200 text-[15px]">
                                 {item.title}

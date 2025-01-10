@@ -59,7 +59,7 @@ const Header = () => {
                     <strong className="font-extrabold text-2xl">EXCLUSIVE</strong>
                 </div>
                 <div className="gap-x-12 mx-auto md:flex hidden">
-                    {filteredNavLinks.map((item: any) => (
+                    {filteredNavLinks.map((item: { id: number; title: string; href: string; }) => (
                         <Link
                             key={item.id}
                             href={item.href}
