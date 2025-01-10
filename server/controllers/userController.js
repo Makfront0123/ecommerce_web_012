@@ -56,13 +56,14 @@ export const loginUser = async (req, res) => {
     const secret = process.env.JWT_SECRET;
 
     if (!secret) {
+        console.error("JWT_SECRET is not defined:", process.env.JWT_SECRET);
         throw new Error('JWT secret is not defined');
     }
 
     const payload = { userId: user._id };
     const token = jwt.sign(payload, secret, { expiresIn: '1h' });
 
-    res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production',sameSite: 'None', });
+    res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'None', });
 
     res.json({ message: 'Logged in successfully' });
 };
