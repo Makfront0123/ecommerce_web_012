@@ -190,16 +190,19 @@ export const aboutUser = [
 
 export const aboutIcons = [
   {
+    id:123,
     num: '10.5K',
     icon: 'solar:shop-outline',
     name: 'Sallers active our site'
   },
   {
+    id:31312,
     num: '33K',
     icon: 'iconoir:home-sale',
     name: 'Monthly Product Sales'
   },
   {
+    id:29,
     num: '45.5K',
     icon: 'iconamoon:gift-light',
     name: 'Gift Cards Sold'
