@@ -1,6 +1,13 @@
 import { Button } from "@/components/ui/button"
 
-export const CheckoutForm = ({ setName, setAddress, name, handleSubmit, address }: any) => {
+interface CheckoutProps {
+    setName: React.Dispatch<React.SetStateAction<string>>;
+    setAddress: React.Dispatch<React.SetStateAction<string>>;
+    name: string;
+    handleSubmit: (event: React.FormEvent) => void;
+    address: string;
+}
+export const CheckoutForm = ({ setName, setAddress, name, handleSubmit, address }: CheckoutProps) => {
 
     return (
         <form action="" onSubmit={handleSubmit} method='POST' className='col-span-6 flex flex-col gap-y-8'>
@@ -34,3 +41,4 @@ export const CheckoutForm = ({ setName, setAddress, name, handleSubmit, address 
 
     )
 }
+/*setName, setAddress, name, handleSubmit, address  */

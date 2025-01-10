@@ -1,5 +1,3 @@
-
-import { UseCart } from '@/hooks/useCart'
 import { useRouter } from 'next/navigation'
 interface CardItemProps {
     product: ProductType
