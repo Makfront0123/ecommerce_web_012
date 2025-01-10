@@ -1,6 +1,5 @@
 import React from 'react';
-
-const TimerRegression = ({ styles }: any) => {
+const TimerRegression = () => {
 
   return (
     <div className="flex sm:flex-row flex-col items-center gap-x-8 gap-y-5 text-gray-600" >
