@@ -1,6 +1,6 @@
-import { createContext, use, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 axios.defaults.baseURL = 'https://ecommerce-web-012.onrender.com';
 axios.defaults.withCredentials = true;
