@@ -49,7 +49,7 @@ const SearchProducts: React.FC = () => {
             {searchLoad && <DialogLoading />}
 
             {loading ? null : searchTerm.trim().length === 0 ? null : (
-                <div className={`fixed left-0 top-0 animate-slide-in-left inset-0 overflow-y-scroll bg-white drop-shadow-lg p-20 max-w-3xl min-h-[204vh] z-50 ${isOpen ? '' : 'hidden'}`}>
+                <div className={`fixed left-0 top-0 animate-slide-in-left inset-0 overflow-y-scroll bg-white drop-shadow-lg  sm:max-w-3xl max-w-[50vh] min-h-[204vh] z-50 ${isOpen ? '' : 'hidden'}`}>
                     {products.length > 0 ? (
                         <div className="flex flex-col gap-y-10">
                             {products.map((product: ProductType) => (
@@ -99,16 +99,16 @@ export const CardUtil = ({ product, setSearchLoad }: { product: ProductType, set
 
     const shortDescription = product?.description?.slice(0, 100);
     return (
-        <div className="relative flex flex-col">
-            <Card className="border-none group flex gap-x-5">
-                <div className="relative max-w-[15rem] max-h-[20rem]">
+        <div className="flex flex-col px-10 py-10">
+            <Card className="relative sm:max-w-[20vh] md:max-w-[100vh] lg:max-w-[100vh] max-w-[50vh]   border-none group flex md:flex-row flex-col gap-x-5">
+                <div className="relative max-w-[20rem] max-h-[20rem]">
                     {product.flashSale && product.discount > 0 && (
                         <div className="absolute -top-1 -left-2 py-1 px-4 rounded-lg bg-red-600 m-5 z-20">
                             <span className="text-white font-bold">-{product?.discount * 100}%</span>
                         </div>
                     )}
 
-                    <Image src={product.image} alt={product.name} className="bg-gray-600 object-contain p-10" width={200} height={200} />
+                    <Image src={product.image} alt={product.name} className="bg-gray-600 object-cover w-full  rounded-md p-10" width={200} height={200} />
                 </div>
                 <div className="mt-2 px-5 max-w-[20rem]">
                     <span className="font-bold">{product.name}</span>
