@@ -57,7 +57,6 @@ export const TableCardProducts = ({ products, quantities, updateQuantity }: { pr
                             </TableCell>
                             <TableCell>
                                 <ButtonCountCart
-                                    price={item.price}
                                     item={item}
                                     quantity={quantity}
                                     onQuantityChange={updateQuantity}

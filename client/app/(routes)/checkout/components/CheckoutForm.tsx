@@ -41,4 +41,3 @@ export const CheckoutForm = ({ setName, setAddress, name, handleSubmit, address 
 
     )
 }
-/*setName, setAddress, name, handleSubmit, address  */

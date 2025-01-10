@@ -4,7 +4,7 @@ import { UseCart } from '@/hooks/useCart'
 import { UseFavorite } from '@/hooks/useFavorite'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React  from 'react'
+import React from 'react'
 import { Icon } from '@iconify/react'
 
 const Wishlist = () => {
@@ -41,13 +41,13 @@ export default Wishlist
 interface CardItemProps {
   products: ProductType
 }
-export const CardFavorite = (props: CardItemProps) => {
+const CardFavorite = (props: CardItemProps) => {
   const { products } = props
   const perce = products.price * products.discount
   const total = products.price - perce
   const router = useRouter()
   const { addItem } = UseCart()
-  const {  removeFavorite } = UseFavorite()
+  const { removeFavorite } = UseFavorite()
 
 
 

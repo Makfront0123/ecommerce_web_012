@@ -46,7 +46,7 @@ const CarouselToday = ({ product }: { product: ProductType[] }) => {
 export default CarouselToday;
 
 
-export const CardUtil = ({ product }: { product: ProductType }) => {
+const CardUtil = ({ product }: { product: ProductType }) => {
     const { addItem } = UseCart()
     const { addFavorite, removeFavorite, itemsFavorite } = UseFavorite()
     const [isFavorite, setIsFavorite] = useState(itemsFavorite.some((item) => item._id === product?._id));

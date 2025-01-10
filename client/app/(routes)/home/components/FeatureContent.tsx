@@ -20,7 +20,7 @@ const FeatureContent = () => {
 
 export default FeatureContent
 
-export const FeatureContentCard = () => {
+const FeatureContentCard = () => {
     return (
         <div className="grid md:grid-cols-12 [&>div]:max-h-[80vh] gap-y-6   gap-x-10 mt-14">
             <div className="relative col-span-6 rounded-md shadow-md ">
@@ -89,7 +89,7 @@ export const FeatureContentCard = () => {
     )
 
 }
-export const FeatureIcons = () => {
+const FeatureIcons = () => {
     return (
         <div className="flex md:flex-row flex-col sm:gap-y-2 gap-y-10 items-center justify-evenly gap-x-5 mt-40">
             <div className="flex flex-col items-center gap-y-2">

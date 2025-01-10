@@ -39,7 +39,7 @@ const CategoriesCarousel = ({ categories }: { categories: CategoryType[] }) => {
 export default CategoriesCarousel;
 
 
-export const CardUtil = ({ category }: { category: CategoryType }) => {
+const CardUtil = ({ category }: { category: CategoryType }) => {
     const router = useRouter();
 
     const handleClick = () => {
@@ -49,7 +49,7 @@ export const CardUtil = ({ category }: { category: CategoryType }) => {
     if (category == null) {
         return <div className='mt-10'><SkeletonCard /></div>
     }
-    
+
     return (
         <Card onClick={handleClick} className='cursor-pointer drop-shadow-md [&>div]:hover:text-white text-black hover:bg-red-600 duration-400 transition-colors bg-none border-2 flex items-center justify-center border-gray-300 min-h-[30vh] w-full mt-8'>
             <div className="flex flex-col items-center justify-center gap-y-3">
