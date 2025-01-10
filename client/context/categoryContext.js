@@ -10,8 +10,7 @@ const CategoryContext = createContext();
 export const CategoryContextProvider = ({ children }) => {
     const { product } = useProductContext()
     const [allCategories, setCategories] = useState([]);
-    const [category, setCategory] = useState(null);
-    const [categoryById, setCategoryById] = useState({})
+    const [categoryById, setCategoryById] = useState({});
     const [loading, setLoading] = useState(false);
 
     const categoryId = product?.category;
@@ -24,7 +23,7 @@ export const CategoryContextProvider = ({ children }) => {
                 setCategories(response.data);
             } else {
                 console.error('La respuesta de la API no es un arreglo:', response.data);
-                setCategories([]); // Si no es un arreglo, establece un arreglo vacío
+                setCategories([]); 
             }
         } catch (error) {
             console.error(error);
@@ -46,7 +45,6 @@ export const CategoryContextProvider = ({ children }) => {
         }
     };
 
-   
     useEffect(() => {
         getCategories();
     }, []);
@@ -56,11 +54,9 @@ export const CategoryContextProvider = ({ children }) => {
             getCategoryById(categoryId);
         }
     }, [categoryId]);
-    
-
 
     return (
-        <CategoryContext.Provider value={{ allCategories, category, loading, categoryById ,setLoading}}>
+        <CategoryContext.Provider value={{ allCategories, categoryById, loading, setLoading }}>
             {children}
         </CategoryContext.Provider>
     );

@@ -46,7 +46,6 @@ export const GlobalContextProvider = ({ children }) => {
     };
 
     const register = async (name, email, password) => {
-        console.log(name, email, password)
         setLoading(true);
         try {
             if (!name) {
