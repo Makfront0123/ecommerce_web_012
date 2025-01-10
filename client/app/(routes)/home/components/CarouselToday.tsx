@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
 import { SkeletonCard } from '../../product/components/SkeletonProduct';
 import {
@@ -99,9 +99,16 @@ export const CardUtil = ({ product }: { product: ProductType }) => {
                                     width="24" height="24" />
                             </Button>
 
-                            <Button onClick={() => {
-                                isAuthenticated ? router.push(`/product/${product?._id}`) : handleLinkClick('/login')
-                            }} className="px-1 py-1 rounded-full bg-white drop-shadow-md text-black">
+                            <Button
+                                onClick={() => {
+                                    if (isAuthenticated) {
+                                        router.push(`/product/${product?._id}`);
+                                    } else {
+                                        handleLinkClick('/login');
+                                    }
+                                }}
+                                className="px-1 py-1 rounded-full bg-white drop-shadow-md text-black"
+                            >
                                 <Icon icon="ic:baseline-remove-red-eye" width="24" height="24" />
                             </Button>
 
@@ -109,7 +116,11 @@ export const CardUtil = ({ product }: { product: ProductType }) => {
                         </div>
                         <Image src={product.image} alt={product.name} className=" object-contain p-10" width={500} height={500} />
                         <CardContent onClick={() => {
-                            { isAuthenticated ? addItem(product) : handleLinkClick('/login') }
+                            if (isAuthenticated) {
+                                addItem(product)
+                            } else {
+                                handleLinkClick('/login');
+                            }
                         }} className="group-hover:flex group-hover:animate-slide-out-top hidden cursor-pointer absolute bottom-0 hover:bg-gray-400 bg-black w-full hover:opacity-70 duration-400 transition-all  items-center justify-center p-3 text-center text-white">
                             Add To Cart
                         </CardContent>

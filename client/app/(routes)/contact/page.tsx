@@ -4,6 +4,14 @@ import { usePathname } from 'next/navigation'
 import { Icon } from '@iconify/react'
 import React from 'react'
 
+interface props {
+  id: number;
+  title: string;
+  desc: string;
+  phone: string;
+  icon: string;
+}
+
 export default function Contact() {
   const pathname = usePathname()
   const path = pathname.split('/')
@@ -69,7 +77,7 @@ export const ContactInfo = () => {
     <div className="flex flex-col items-center justify-center gap-y-10 mt-10">
       {
         contactData.map((item) => (
-          <ContactItem key={item.id} icon={item.icon} title={item.title} desc={item.desc} phone={item.phone} />
+          <ContactItem id={item.id} icon={item.icon} title={item.title} desc={item.desc} phone={item.phone} />
         ))
       }
       
@@ -77,7 +85,9 @@ export const ContactInfo = () => {
   )
 }
 
-export const ContactItem = ({ id, title, desc, phone, icon }: any) => {
+
+
+export const ContactItem = ({ id, title, desc, phone, icon }: props) => {
   return (
     <div className='flex flex-col gap-y-6' key={id}>
       <div className="flex items-center gap-x-4">

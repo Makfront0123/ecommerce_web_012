@@ -28,7 +28,7 @@ const Checkout = () => {
 
     const total = items.reduce((total, item) => total + item.price * item.quantity, 0);
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!paymentMethod) {

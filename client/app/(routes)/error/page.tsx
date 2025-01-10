@@ -1,5 +1,4 @@
 "use client"
-import { useGlobalContext } from '@/context/globalContext'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import React from 'react'
