@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useProductContext } from './productContext';
 
-axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.baseURL = 'https://ecommerce-web-012.onrender.com';
 axios.defaults.withCredentials = true;
 
 const CategoryContext = createContext();
