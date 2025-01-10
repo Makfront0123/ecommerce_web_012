@@ -9,7 +9,6 @@ export const CardItem = (props: CardItemProps) => {
     const { product } = props
     console.log(product)
     const router = useRouter()
-    const { removeItem } = UseCart()
     return (
         <li className="flex py-6 border-b">
             <div onClick={() => router.push(`/product/${product.name}`)}>

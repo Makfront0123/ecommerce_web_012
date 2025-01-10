@@ -1,9 +1,9 @@
-import { Card, CardContent, CardFooter } from '../../../../components/ui/card';
+import { Card, CardContent } from '../../../../components/ui/card';
 import Image from 'next/image';
 import { UseCart } from '@/hooks/useCart';
 import { Button } from '../../../../components/ui/button';
 import { UseFavorite } from '@/hooks/useFavorite';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
 import { useRouter } from 'next/navigation';
 import { useGlobalContext } from '@/context/globalContext';
@@ -13,7 +13,6 @@ export const CardUtil = ({ product }: { product: ProductType }) => {
     const [isFavorite, setIsFavorite] = useState(itemsFavorite.some((item) => item._id === product?._id));
     const router = useRouter()
     const { isAuthenticated } = useGlobalContext()
-    const [loading, setLoading] = useState(false)
     const handleFavoriteClick = () => {
         if (isFavorite) {
 
@@ -28,12 +27,8 @@ export const CardUtil = ({ product }: { product: ProductType }) => {
     };
 
     const handleLinkClick = (href: string) => {
-        setLoading(true)
-        setTimeout(() => {
-            router.push(href)
-            setLoading(false)
-        }, 1400)
-    }
+        router.push(href);
+    };
 
     return (
         <div className="flex flex-col">
@@ -53,17 +48,26 @@ export const CardUtil = ({ product }: { product: ProductType }) => {
                                 width="24" height="24" />
                         </Button>
 
-                        <button onClick={() => {
-                            isAuthenticated ? router.push(`/product/${product?._id}`) : handleLinkClick('/login')
-                        }} className="px-1 py-1 rounded-full bg-white drop-shadow-md text-black">
+                        <Button
+                            onClick={() => {
+                                if (isAuthenticated) {
+                                    router.push(`/product/${product?._id}`);
+                                } else {
+                                    handleLinkClick('/login');
+                                }
+                            }}
+                            className="px-1 py-1 rounded-full bg-white drop-shadow-md text-black"
+                        >
                             <Icon icon="ic:baseline-remove-red-eye" width="24" height="24" />
-                        </button>
-
-
+                        </Button>
                     </div>
                     <Image src={product?.image} alt={product.name} className=" object-contain md:p-10 p-20" width={450} height={450} />
                     <CardContent onClick={() => {
-                        { isAuthenticated ? addItem(product) : handleLinkClick('/login') }
+                        if (isAuthenticated) {
+                            addItem(product)
+                        } else {
+                            handleLinkClick('/login');
+                        }
                     }} className="group-hover:flex group-hover:animate-slide-out-top hidden cursor-pointer absolute bottom-0 hover:bg-gray-400 bg-black w-full hover:opacity-70 duration-400 transition-all  items-center justify-center p-3 text-center text-white">
                         Add To Cart
                     </CardContent>

@@ -1,26 +1,25 @@
-import { useState } from "react";
 import { UseCart } from "@/hooks/useCart";
 
-export const ButtonCountCart = ({ price, item, onQuantityChange, quantity }: { price: number, item: ProductType, onQuantityChange: (id: string, quantity: number) => void, quantity: number }) => {
+export const ButtonCountCart = ({item, onQuantityChange, quantity }: { item: ProductType, onQuantityChange: (id: string, quantity: number) => void, quantity: number }) => {
     const { updateItemQuantity } = UseCart();
 
     const increment = () => {
         const newQuantity = quantity + 1;
-        onQuantityChange(item._id, newQuantity); // Actualiza la cantidad en el componente padre
+        onQuantityChange(item._id, newQuantity);
         updateItemQuantity(item._id, newQuantity);
     };
 
     const decrement = () => {
         if (quantity > 1) {
             const newQuantity = quantity - 1;
-            onQuantityChange(item._id, newQuantity); // Actualiza la cantidad en el componente padre
+            onQuantityChange(item._id, newQuantity);
             updateItemQuantity(item._id, newQuantity);
         }
     };
 
     const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = Math.max(1, parseInt(e.target.value, 10)); // Asegura que la cantidad sea >= 1
-        onQuantityChange(item._id, value); // Actualiza la cantidad en el componente padre
+        const value = Math.max(1, parseInt(e.target.value, 10)); 
+        onQuantityChange(item._id, value); 
         updateItemQuantity(item._id, value);
     };
 
