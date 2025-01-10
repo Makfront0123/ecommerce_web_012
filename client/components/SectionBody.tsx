@@ -8,7 +8,7 @@ interface SectionBodyProps {
 
 const SectionBody = ({ title, children, button }: SectionBodyProps) => {
   return (
-    <section className="flex flex-col mt-20 w-full">
+    <section className="flex flex-col sm:px-1 px-6 mt-20 w-full">
       <div className="flex items-center justify-between px-4 py-1 border-l-[20px] border-red-600 rounded-l-lg mb-10">
         <span className="text-red-600 font-bold text-[20px]">{title}</span>
         {button && (

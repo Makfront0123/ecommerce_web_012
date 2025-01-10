@@ -49,7 +49,7 @@ export function CarouselHero() {
               <Card >
                 <Image
                   src={image}
-                  className="object-fill sm:min-w-[20vh] xs:min-w-[9vh] md:min-w-[20vh] min-w-[14vh]"
+                  className="object-fill w-full"
                   width={892}
                   alt="banner"
                   height={504}

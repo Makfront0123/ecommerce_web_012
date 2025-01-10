@@ -14,7 +14,7 @@ const TodayContent = () => {
     return (
         <div className=' flex flex-col items-start w-full min-h-[100vh] border-b-2  border-gray-100'>
             <div className="flex items-start  justify-between  mt-10 gap-x-20">
-                <div className="flex sm:flex-row flex-col items-center sm:gap-y-2 gap-y-4  mx-auto sm:gap-x-20 gap-x-2">
+                <div className="flex sm:flex-row flex-col items-start sm:gap-y-2 gap-y-4  mx-auto sm:gap-x-20 gap-x-2">
                     <h2 className=' text-3xl font-semibold'>Flash Sales</h2>
                     <TimerRegression />
                 </div>

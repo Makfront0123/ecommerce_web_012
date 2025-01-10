@@ -7,7 +7,7 @@ const ExploreContent = () => {
     const unsaleProducts = products.filter((product: ProductType) => product?.flashSale === false);
     return (
         <div className=' flex flex-col w-full min-h-[100vh] border-b-2  border-gray-100'>
-            <div className="flex items-start justify-between  mt-10 gap-x-20">
+            <div className="flex sm:items-start items-center justify-between  mt-10 gap-x-20">
                 <div className="flex items-center gap-20">
                     <h2 className=' text-3xl font-semibold'>Explore Our Products</h2>
 

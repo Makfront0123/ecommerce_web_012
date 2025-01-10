@@ -11,7 +11,7 @@ import TodayContent from "@/app/(routes)/home/components/TodayContent";
 export default function Home() {
 
   return (
-    <main className="mx-auto container overflow-hidden px-10 flex flex-col items-center justify-center" id="home">
+    <main className="mx-auto container overflow-hidden  flex flex-col items-center justify-center" id="home">
       <Hero />
       <SectionBody title="Today`s">
         <TodayContent />

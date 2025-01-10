@@ -2,7 +2,7 @@ import React from 'react';
 const TimerRegression = () => {
 
   return (
-    <div className="flex sm:flex-row flex-col items-center gap-x-8 gap-y-5 text-gray-600" >
+    <div className="flex flex-row items-start sm:gap-x-3 gap-x-0 sm:mr-1 mr-5 gap-y-5 text-gray-600" >
       <TimerInfo num={'0-369'} time='Days' />
       <TimerInfo num={'1-120'} time='Hours' />
       <TimerInfo num={'1-60'} time='Minutes' />

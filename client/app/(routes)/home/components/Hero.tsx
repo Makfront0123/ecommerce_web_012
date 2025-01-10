@@ -18,7 +18,7 @@ const Hero = () => {
                     }
                 </ul>
             </div>
-            <div className="col-span-9 p-10">
+            <div className="col-span-9 sm:p-10">
                 <CarouselHero />
             </div>
         </section>

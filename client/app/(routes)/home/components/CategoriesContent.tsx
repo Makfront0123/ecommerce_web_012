@@ -7,7 +7,7 @@ import AnimateOnScroll from '@/components/AnimationOnScroll'
 const CategoriesContent = () => {
   const { allCategories } = useCategoryContext()
   return (
-    <div className='flex flex-col items-start'>
+    <div className='flex flex-col sm:items-start'>
       <h3 className="font-bold text-3xl mb-3 mt-10 ">
         Browse By Category
       </h3>

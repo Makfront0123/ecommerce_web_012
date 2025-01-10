@@ -58,7 +58,7 @@ const Header = () => {
                 <div>
                     <strong className="font-extrabold text-2xl">EXCLUSIVE</strong>
                 </div>
-                <div className="gap-x-12 mx-auto md:flex hidden">
+                <div className="gap-x-12 mx-auto lg:flex hidden">
                     {filteredNavLinks.map((item: { id: number; title: string; href: string; }) => (
                         <Link
                             key={item.id}
@@ -73,10 +73,10 @@ const Header = () => {
                         </Link>
                     ))}
                 </div>
-                <div className="md:hidden flex mt-2">
+                <div className="lg:hidden flex mt-2">
                     <MenuMobile />
                 </div>
-                <div className="flex items-center gap-x-8">
+                <div className="flex items-center sm:gap-x-8 gap-x-4">
                     <SearchProducts/>
                     <Link
                         href={`${isAuthenticated ? "/wishlist" : "/login"}`}
