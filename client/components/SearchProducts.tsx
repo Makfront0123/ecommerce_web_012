@@ -53,7 +53,7 @@ const SearchProducts: React.FC = () => {
                     {products.length > 0 ? (
                         <div className="flex flex-col gap-y-10">
                             {products.map((product: ProductType) => (
-                                <CardUtil key={product._id} product={product} setIsOpen={setIsOpen} setSearchLoad={setSearchLoad} />
+                                <CardUtil key={product._id} product={product} setSearchLoad={setSearchLoad} />
                             ))}
                         </div>
                     ) : (
@@ -68,7 +68,7 @@ const SearchProducts: React.FC = () => {
 export default SearchProducts;
 
 
-export const CardUtil = ({ product, setIsOpen, setSearchLoad }: { product: ProductType, setIsOpen: React.Dispatch<React.SetStateAction<boolean>>, setSearchLoad: React.Dispatch<React.SetStateAction<boolean>> }) => {
+export const CardUtil = ({ product, setSearchLoad }: { product: ProductType, setSearchLoad: React.Dispatch<React.SetStateAction<boolean>> }) => {
     const { addItem } = UseCart();
     const { addFavorite, removeFavorite, itemsFavorite } = UseFavorite();
     const [isFavorite, setIsFavorite] = useState(itemsFavorite.some((item) => item._id === product?._id));
