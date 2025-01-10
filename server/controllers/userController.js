@@ -61,7 +61,7 @@ export const loginUser = async (req, res) => {
     const payload = { userId: user._id };
     const token = jwt.sign(payload, secret, { expiresIn: '1h' });
 
-    res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+    res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production',sameSite: 'None', });
 
     res.json({ message: 'Logged in successfully' });
 };
