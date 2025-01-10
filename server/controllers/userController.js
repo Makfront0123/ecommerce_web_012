@@ -1,7 +1,5 @@
 import User from '../models/userModel.js';
 import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
-
 
 export const registerUser = async (req, res) => {
     try {
@@ -34,16 +32,10 @@ export const registerUser = async (req, res) => {
     }
 };
 
-
 export const loginUser = async (req, res) => {
     const tokenVerify = req.cookies.token || req.header('Authorization')?.replace('Bearer ', '');
     if (tokenVerify) {
-        try {
-            return res.status(401).json({ message: 'Already logged in' });
-        } catch (error) {
-
-            return res.status(401).json({ message: 'Invalid token' });
-        }
+        return res.status(401).json({ message: 'Already logged in' });
     }
     const { email, password } = req.body;
 
@@ -54,29 +46,28 @@ export const loginUser = async (req, res) => {
         return res.status(400).json({ message: 'Password is required' });
     }
 
-
     const user = await User.findOne({ email });
 
     if (!user || !(await user.matchPassword(password))) {
         return res.status(401).json({ message: 'Invalid email or password' });
     }
 
+    const secret = process.env.JWT_SECRET;
 
-    const token = jwt.sign({ userId: user._id, email: user.email }, process.env.JWT_SECRET, {
-        expiresIn: '5h',
-    });
+    if (!secret) {
+        throw new Error('JWT secret is not defined');
+    }
 
-
+    const payload = { userId: user._id };
+    const token = jwt.sign(payload, secret, { expiresIn: '1h' });
 
     res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
 
-    res.json({ message: 'Logged in successfully', token });
+    res.json({ message: 'Logged in successfully' });
 };
 
 export const logoutUser = (req, res) => {
-
     res.clearCookie('token', { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-
     res.json({ message: 'Logged out successfully' });
 };
 
