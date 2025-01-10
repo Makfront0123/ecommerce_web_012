@@ -1,8 +1,8 @@
 "use client"
 import React, { useState } from 'react'
-import { Icon } from '@iconify/react'
+
 import FormContent from '@/components/FormControl'
-import Link from 'next/link'
+
 import Image from 'next/image'
 import { useAuth } from '@/hooks/useAuth'
 import { useGlobalContext } from '@/context/globalContext'
@@ -11,7 +11,7 @@ import { SignUpForm } from './components/SignupForm'
 
 
 const SignUp = () => {
-  const { login, register, loading } = useGlobalContext();
+  const {  register, loading } = useGlobalContext();
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -19,7 +19,7 @@ const SignUp = () => {
   useAuth();
 
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     await register(name, email, password)

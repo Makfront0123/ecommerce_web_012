@@ -2,20 +2,23 @@ import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import { useProductContext } from "@/context/productContext";
 
-const RatingStars = ({ productId, totalStars = 5, currentRating }: any) => {
+interface props {
+    productId: string;
+    totalStars?: number;
+    currentRating?: number;
+}
+
+const RatingStars = ({ productId, totalStars = 5, currentRating }: props) => {
     const [rating, setRating] = useState(currentRating || 0);
     const { rateProduct } = useProductContext()
 
-
-    // Maneja el clic de una estrella
-    const handleClick = async (index: any) => {
+    const handleClick = async (index: number) => {
         setRating(index + 1);
 
         rateProduct(productId, rating)
     };
 
-    // Obtener la clase de la estrella (para mostrarla llena o vacía)
-    const getStarClass = (index: any) => {
+    const getStarClass = (index: number) => {
         return index < rating ? "text-yellow-400" : "text-gray-300";
     };
 

@@ -3,7 +3,7 @@ import FormContent from '@/components/FormControl'
 import { useGlobalContext } from '@/context/globalContext';
 import { useAuth } from '@/hooks/useAuth';
 import Image from 'next/image'
-import { useRouter } from 'next/navigation';
+
 import { useState } from 'react';
 import DialogLoading from '../../../components/DialogLoading';
 import { LoginForm } from './components/LoginForm';
@@ -16,7 +16,7 @@ const Login = () => {
 
   useAuth();
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     await login(email, password);

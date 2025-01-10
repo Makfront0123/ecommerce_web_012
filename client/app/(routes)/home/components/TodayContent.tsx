@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect } from 'react'
+import React from 'react'
 import TimerRegression from '../../../../components/TimerRegression'
-import { Icon } from '@iconify/react'
 import CarouselToday from './CarouselToday';
 import { useProductContext } from '@/context/productContext';
 import { SkeletonCard } from '../../product/components/SkeletonProduct';

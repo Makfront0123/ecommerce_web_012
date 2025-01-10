@@ -76,8 +76,8 @@ export const ContactInfo = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-y-10 mt-10">
       {
-        contactData.map((item) => (
-          <ContactItem id={item.id} icon={item.icon} title={item.title} desc={item.desc} phone={item.phone} />
+        contactData.map((item,index) => (
+          <ContactItem key={index} id={item.id} icon={item.icon} title={item.title} desc={item.desc} phone={item.phone} />
         ))
       }
       

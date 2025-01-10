@@ -34,7 +34,7 @@ const AnimateOnScroll = ({
         return () => {
             if (element) observer.unobserve(element);
         };
-    }, []);
+    }, [threshold]);
 
     return (
         <div

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Poppins, Roboto } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import "./globals.css";
 import { ContextProvider } from "@/providers/ContextProvider";
 import Header from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
-import LoadingComponent from "@/components/LoadingComponent";
+import Script from 'next/script';
+
 
 const poppins = Poppins({
   weight: ['400', '500', '600'],
@@ -27,7 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+        <Script
+          src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"
+          strategy="afterInteractive"
+        />
       </head>
       <body
         className={`${poppins.className} antialiased`}

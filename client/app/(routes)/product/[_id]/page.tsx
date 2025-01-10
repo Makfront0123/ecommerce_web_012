@@ -7,14 +7,13 @@ import { UseCart } from '@/hooks/useCart';
 import { UseFavorite } from '@/hooks/useFavorite';
 import { Icon } from '@iconify/react'
 import Image from 'next/image';
-import {  useState } from 'react';
+import { useState } from 'react';
 
 const DetailsProduct = () => {
   const { product } = useProductContext()
   const { addFavorite, removeFavorite, itemsFavorite } = UseFavorite()
   const [isFavorite, setIsFavorite] = useState(itemsFavorite.some((item) => item._id === product?._id));
   const { addItem } = UseCart()
-  const [quantity, setQuantity] = useState(1)
   const { categoryById } = useCategoryContext()
   const { name } = categoryById
 
@@ -38,8 +37,7 @@ const DetailsProduct = () => {
 
   const handleAddToCart = () => {
     if (product) {
-      const productWithQuantity = { ...product, quantity };
-      addItem(productWithQuantity);
+      addItem(product);
     }
   };
 

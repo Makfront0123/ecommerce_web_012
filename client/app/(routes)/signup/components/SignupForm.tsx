@@ -1,6 +1,15 @@
 import Link from "next/link"
 import {Icon} from "@iconify/react"
-export const SignUpForm = ({ handleSubmit, email, setEmail, password, setPassword, name, setName }: any) => {
+interface props {
+    handleSubmit: React.FormEventHandler<HTMLFormElement>;
+    email: string;
+    setEmail: React.Dispatch<React.SetStateAction<string>>;
+    password: string;
+    setPassword: React.Dispatch<React.SetStateAction<string>>;
+    name: string;
+    setName: React.Dispatch<React.SetStateAction<string>>;
+  }
+export const SignUpForm = ({ handleSubmit, email, setEmail, password, setPassword, name, setName }: props) => {
 
     return (
       <form onSubmit={handleSubmit} method='POST' className='flex flex-col gap-y-3 mt-6 [&>input]:outline-none'>

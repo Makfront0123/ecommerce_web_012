@@ -1,6 +1,6 @@
 "use client";
 import { useGlobalContext } from '@/context/globalContext';
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 
 const Profile = () => {
     const { user, updateUserProfile } = useGlobalContext();
@@ -11,7 +11,7 @@ const Profile = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     
-    const handleSubmit = async (e:any) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         await updateUserProfile(name, email, currentPassword, password, confirmPassword);
     };

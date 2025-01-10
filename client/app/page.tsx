@@ -13,11 +13,19 @@ export default function Home() {
   return (
     <main className="mx-auto container overflow-hidden px-10 flex flex-col items-center justify-center" id="home">
       <Hero />
-      <SectionBody title="Today`s" children={<TodayContent />} />
-      <SectionBody title="Categories" children={<CategoriesContent />} />
-      <SectionBody title="Our Products" children={<ExploreContent />} />
+      <SectionBody title="Today`s">
+        <TodayContent />
+      </SectionBody>
+      <SectionBody title="Categories">
+        <CategoriesContent />
+      </SectionBody>
+      <SectionBody title="Our Products">
+        <ExploreContent />
+      </SectionBody>
       <BannerBody />
-      <SectionBody title="Feature" children={<FeatureContent />} />
+      <SectionBody title="Feature">
+        <FeatureContent />
+      </SectionBody>
     </main>
   );
 }
