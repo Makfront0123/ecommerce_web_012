@@ -34,10 +34,7 @@ export const registerUser = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
-    const tokenVerify = req.cookies.token || req.header('Authorization')?.replace('Bearer ', '');
-    if (tokenVerify) {
-        return res.status(401).json({ message: 'Already logged in' });
-    }
+  
     const { email, password } = req.body;
 
     if (!email) {
