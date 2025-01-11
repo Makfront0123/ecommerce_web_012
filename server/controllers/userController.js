@@ -34,7 +34,10 @@ export const registerUser = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
-  
+    const tokenVerify = req.cookies.token || req.header('Authorization')?.replace('Bearer ', '');
+    if (tokenVerify) {
+        return res.status(401).json({ message: 'Already logged in' });
+    }
     const { email, password } = req.body;
 
     if (!email) {
@@ -50,12 +53,7 @@ export const loginUser = async (req, res) => {
         return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    const secret = process.env.JWT_SECRET;
-
-    if (!secret) {
-        console.error("JWT_SECRET is not defined:", process.env.JWT_SECRET);
-        throw new Error('JWT secret is not defined');
-    }
+    const secret = 30129301293029301912039;
 
     const payload = { userId: user._id };
     const token = jwt.sign(payload, secret, { expiresIn: '1h' });
@@ -66,7 +64,7 @@ export const loginUser = async (req, res) => {
 };
 
 export const logoutUser = (req, res) => {
-    res.clearCookie('token', { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+    res.clearCookie('token', { httpOnly: true, secure: true,sameSite: 'None', });
     res.json({ message: 'Logged out successfully' });
 };
 
