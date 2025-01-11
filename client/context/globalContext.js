@@ -65,7 +65,7 @@ export const GlobalContextProvider = ({ children }) => {
                 return;
             }
             await axios.post(`/api/v1/register`, { name, email, password });
-            await login(email, password)
+            router.push('/login')
         } catch (error) {
             console.error(error);
             toast.error("Error Registering");
