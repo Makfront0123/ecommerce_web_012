@@ -9,11 +9,11 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: "https://ecommerce-web-012.vercel.app",
+    origin: `${process.env.CLIENT_URL}`,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    exposedHeaders: ['set-cookie'],
+    exposedHeaders: ['set-cookie']
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -34,7 +34,7 @@ routeFiles.forEach((file) => {
 const server = async () => {
     try {
         await connectDB();
-        const port = process.env.PORT||8000;
+        const port = process.env.PORT || 8000;
         app.listen(port, () => {
             console.log(`Server is running on port ${process.env.PORT}`);
         });
