@@ -21,12 +21,23 @@ const Checkout = () => {
     const path = pathname.split('/');
     const [address, setAddress] = useState('');
     const [name, setName] = useState('');
-    
+
     const [paymentMethod, setPaymentMethod] = useState<string>('');
     const { createOrder, loading } = useOrderContext();
-    const { items } = UseCart();
+    const { items, updateItemQuantity } = UseCart();
 
-    const total = items.reduce((total, item) => total + item.price * item.quantity, 0);
+    const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
+    const updateQuantity = (id: string, quantity: number) => {
+        setQuantities((prev) => ({ ...prev, [id]: quantity }));
+        updateItemQuantity(id, quantity);
+    };
+
+    const total = items.reduce((total, item) => {
+        const price = item.flashSale ? item.price * (1 - item.discount) : item.price;
+        const quantity = quantities[item._id] || 1;
+        return total + price * quantity;
+    }, 0);
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

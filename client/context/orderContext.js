@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { UseCart } from '@/hooks/useCart';
+import { useGlobalContext } from './globalContext';
 
 axios.defaults.baseURL = "https://ecommerce-web-012.onrender.com";
 axios.defaults.withCredentials = true;
@@ -11,6 +12,7 @@ const OrderContext = createContext();
 export const OrderContextProvider = ({ children }) => {
     const [orders, setOrders] = useState([])
     const [loading, setLoading] = useState(false)
+    const {userProfile}=useGlobalContext();
     const { removeAll } = UseCart()
     const router = useRouter()
     const getOrders = async () => {
@@ -27,10 +29,15 @@ export const OrderContextProvider = ({ children }) => {
             setLoading(false)
         }
     }
+    
     const createOrder = async (orderData) => {
+        const orderDataUser={
+            ...orderData,
+            user:userProfile._id,
+        }
         setLoading(true)
         try {
-            const response = await axios.post(`/api/v1/create-order`, orderData)
+            const response = await axios.post(`/api/v1/create-order`, orderDataUser)
             toast.success('Order created successfully')
             setOrders(response.data)
             setLoading(false)
