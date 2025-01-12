@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { UseCart } from '@/hooks/useCart';
 
-axios.defaults.baseURL = `${process.env.NEXT_PUBLIC_BACKEND_URL}`;
+axios.defaults.baseURL = "https://ecommerce-web-012.vercel.app";
 axios.defaults.withCredentials = true;
 
 const OrderContext = createContext();

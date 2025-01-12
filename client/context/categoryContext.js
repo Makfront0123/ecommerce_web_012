@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useProductContext } from './productContext';
 
-axios.defaults.baseURL = `${process.env.NEXT_PUBLIC_BACKEND_URL}`;
+axios.defaults.baseURL = "https://ecommerce-web-012.vercel.app"
 axios.defaults.withCredentials = true;
 
 const CategoryContext = createContext();
