@@ -4,14 +4,13 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { UseCart } from '@/hooks/useCart';
 
-axios.defaults.baseURL = 'https://ecommerce-web-012.onrender.com';
+axios.defaults.baseURL = `${process.env.NEXT_PUBLIC_BACKEND_URL}`;
 axios.defaults.withCredentials = true;
 
 const OrderContext = createContext();
 export const OrderContextProvider = ({ children }) => {
     const [orders, setOrders] = useState([])
     const [loading, setLoading] = useState(false)
-    const url=process.env.NEXT_PUBLIC_BACKEND_URL;
     const { removeAll } = UseCart()
     const router = useRouter()
     const getOrders = async () => {
