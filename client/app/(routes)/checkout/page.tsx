@@ -24,17 +24,11 @@ const Checkout = () => {
 
     const [paymentMethod, setPaymentMethod] = useState<string>('');
     const { createOrder, loading } = useOrderContext();
-    const { items, updateItemQuantity } = UseCart();
-
-    const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
-    const updateQuantity = (id: string, quantity: number) => {
-        setQuantities((prev) => ({ ...prev, [id]: quantity }));
-        updateItemQuantity(id, quantity);
-    };
+    const { items } = UseCart();
 
     const total = items.reduce((total, item) => {
         const price = item.flashSale ? item.price * (1 - item.discount) : item.price;
-        const quantity = quantities[item._id] || 1;
+        const quantity = 1;
         return total + price * quantity;
     }, 0);
 
@@ -84,13 +78,13 @@ const Checkout = () => {
                         address={address}
                     />
                     <div className="flex flex-col col-span-6 p-5 gap-y-4 sm:mt-0 mt-10 w-full h-full">
-                        {items.map((item) => (
+                        {items.map((item:ProductType) => (
                             <div key={item?._id} className="flex items-center justify-between border-b-2 border-gray-100 py-2">
                                 <div className="flex items-center gap-x-2">
                                     <Image src={item.image} alt={item.name} width={50} height={100} />
                                     <span className="text-sm">${item?.name}</span>
                                 </div>
-                                <span>${item?.price}</span>
+                                <span>${item.flashSale ? item.price * (1 - item.discount) : item.price}</span>
                             </div>
                         ))}
                         <div className="mt-10">
