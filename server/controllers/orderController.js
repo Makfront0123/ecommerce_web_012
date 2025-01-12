@@ -2,7 +2,12 @@ import asyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
 
 export const createOrder = asyncHandler(async (req, res) => {
-    const order = new Order(req.body);
+    const id=req.user.id;
+    const orderData={
+        ...req.body,
+        user:id
+    }
+    const order = new Order(orderData);
     try {
         await order.save();
         return res.status(201).json(order);
