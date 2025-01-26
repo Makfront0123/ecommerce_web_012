@@ -8,7 +8,7 @@ import { SignUpForm } from './components/SignupForm'
 
 
 const SignUp = () => {
-  const { register, loading } = useGlobalContext();
+  const { register } = useGlobalContext();
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
