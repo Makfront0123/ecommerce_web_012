@@ -78,55 +78,6 @@ export const ProductContextProvider = ({ children }) => {
     }, [id]);
 
 
-
-
-    const createProduct = async (productData) => {
-        setLoading(true)
-        try {
-            const response = await axios.post('/api/v1/create-product', productData)
-            toast.success('Product created successfully')
-            setProducts(response.data)
-            setLoading(false)
-        } catch (error) {
-            console.error(error)
-        } finally {
-            setLoading(false)
-        }
-    }
-
-    const editProduct = async (id) => {
-        setLoading(true)
-        try {
-            const response = await axios.put(`/api/v1/product/${id}`)
-            toast.success('Product updated successfully')
-            setProducts(response.data)
-            setLoading(false)
-        } catch (error) {
-            console.error(error)
-        } finally {
-            setLoading(false)
-        }
-    }
-
-  
-    const deleteProduct = async (id) => {
-        setLoading(true)
-        try {
-            const response = await axios.delete(`/api/v1/product/${id}`)
-            toast.success('Product deleted successfully')
-            setProducts(response.data)
-            setLoading(false)
-        } catch (error) {
-            console.error(error)
-        } finally {
-            setLoading(false)
-        }
-    }
-
-
-
-
-
     const searchProducts = async (name, category) => {
         setLoading(true);
         try {

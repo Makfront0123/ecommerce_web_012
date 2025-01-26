@@ -44,7 +44,7 @@ const SearchProducts: React.FC = () => {
                 value={searchTerm}
                 onChange={handleSearch}
                 placeholder="Search products..."
-                className="sm:max-w-2xl max-w-[30vh]"
+                className="sm:max-w-2xl max-w-[23vh]"
             />
             {searchLoad && <DialogLoading />}
 

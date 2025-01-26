@@ -31,13 +31,9 @@ export const OrderContextProvider = ({ children }) => {
     }
     
     const createOrder = async (orderData) => {
-        const orderDataUser={
-            ...orderData,
-            user:userProfile._id,
-        }
         setLoading(true)
         try {
-            const response = await axios.post(`/api/v1/create-order`, orderDataUser)
+            const response = await axios.post(`/api/v1/create-order`, orderData)
             toast.success('Order created successfully')
             setOrders(response.data)
             setLoading(false)

@@ -32,7 +32,7 @@ const Checkout = () => {
         return total + price * quantity;
     }, 0);
 
-
+    
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 

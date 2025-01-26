@@ -1,12 +1,9 @@
 "use client"
 import React, { useState } from 'react'
-
 import FormContent from '@/components/FormControl'
-
 import Image from 'next/image'
 import { useAuth } from '@/hooks/useAuth'
 import { useGlobalContext } from '@/context/globalContext'
-import DialogLoading from '@/components/DialogLoading'
 import { SignUpForm } from './components/SignupForm'
 
 
@@ -41,11 +38,8 @@ const SignUp = () => {
                 password={password} setPassword={setPassword} />} />
         </div>
       </div>
-      {loading && <DialogLoading />}
+
     </>
-
-
-
   )
 }
 
