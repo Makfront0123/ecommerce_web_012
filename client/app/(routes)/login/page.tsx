@@ -23,9 +23,9 @@ const Login = () => {
   };
   return (
     <>
-      <div className='relative lg:mt-14 mt-0 grid md:grid-cols-12 '>
+      <div className='relative lg:mt-14 mt-0 grid md:grid-cols-12 overflow-hidden '>
         <div className='col-span-6'>
-          <Image src="/signup/image01.png" className='w-full h-full object-contain' width={892} height={540} alt="" />
+          <Image src="/signup/image01.png" className='object-cover' width={892} height={540} alt="" />
 
         </div>
         <div className='col-span-6 xl:px-24 sm:px-18 px-12 mt-10'>

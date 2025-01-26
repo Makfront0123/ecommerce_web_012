@@ -24,9 +24,9 @@ const SignUp = () => {
   }
   return (
     <>
-      <div className='md:mt-14 mt-0 grid md:grid-cols-12' id="signup">
+      <div className='md:mt-14 mt-0 grid md:grid-cols-12 overflow-hidden' id="signup">
         <div className='col-span-6'>
-          <Image src="/signup/image01.png" className='object-contain' width={752} height={500} alt="" />
+          <Image src="/signup/image01.png" className='object-cover' width={752} height={500} alt="" />
         </div>
         <div className='col-span-6 lg:px-32 md:px-14 px-12 mt-10'>
           <FormContent title='Log in to Exclusive' desc='Enter your details below'
