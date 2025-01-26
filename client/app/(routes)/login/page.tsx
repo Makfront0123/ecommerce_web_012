@@ -28,7 +28,7 @@ const Login = () => {
           <Image src="/signup/image01.png" className='object-cover' width={892} height={540} alt="" />
 
         </div>
-        <div className='col-span-6 xl:px-24 sm:px-18 px-12 mt-10'>
+        <div className='col-span-6 xl:px-24 sm:px-18 px-20 mt-10'>
           <FormContent title='Log in to Exclusive' desc='Enter your details below'
             form={
               <LoginForm
