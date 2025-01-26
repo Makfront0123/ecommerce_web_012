@@ -28,7 +28,7 @@ const SignUp = () => {
         <div className='col-span-6'>
           <Image src="/signup/image01.png" className='object-cover' width={752} height={500} alt="" />
         </div>
-        <div className='col-span-6 lg:px-32 md:px-14 px-20 mt-10'>
+        <div className='col-span-6 lg:px-32 md:px-14 px-6 mt-10'>
           <FormContent title='Log in to Exclusive' desc='Enter your details below'
             form={
               <SignUpForm
