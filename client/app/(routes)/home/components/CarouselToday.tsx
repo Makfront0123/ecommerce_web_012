@@ -29,7 +29,7 @@ const CarouselToday = ({ product }: { product: ProductType[] }) => {
             <CarouselContent className='flex'>
                 {product.map((product: ProductType) => {
                     return (
-                        <CarouselItem key={product._id} className="sm:basis-1/4 basis-1/2">
+                        <CarouselItem key={product._id} className="lg:basis-1/4 basis-3/5">
                             <div className="p-1">
                                 <CardUtil product={product} />
                             </div>
@@ -125,9 +125,6 @@ const CardUtil = ({ product }: { product: ProductType }) => {
                             Add To Cart
                         </CardContent>
                     </div>
-
-
-
                 </Card>
                 <div className="mt-5">
                     <span className='font-bold' >{product.name}</span>

@@ -22,7 +22,7 @@ const CategoriesCarousel = ({ categories }: { categories: CategoryType[] }) => {
             <CarouselContent>
                 {categories.map((categories: CategoryType) => {
                     return (
-                        <CarouselItem key={categories._id} className="sm:basis-1/4 basis-1/2">
+                        <CarouselItem key={categories._id} className="sm:basis-1/4 basis-3/4">
                             <div className="p-1">
                                 <CardUtil category={categories} />
                             </div>
