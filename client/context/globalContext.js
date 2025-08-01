@@ -68,7 +68,7 @@ export const GlobalContextProvider = ({ children }) => {
             router.push('/login')
         } catch (error) {
             console.error(error);
-            toast.error("Error Registering");
+            toast.error("Error Register");
         } finally {
             setLoading(false);
         }
