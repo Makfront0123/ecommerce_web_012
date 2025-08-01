@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-axios.defaults.baseURL = "https://ecommerce-web-012.onrender.com";
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 axios.defaults.withCredentials = true;
 
 const GlobalContext = createContext();

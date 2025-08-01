@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { UseCart } from '@/hooks/useCart';
 import { useGlobalContext } from './globalContext';
 
-axios.defaults.baseURL = "https://ecommerce-web-012.onrender.com";
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 axios.defaults.withCredentials = true;
 
 const OrderContext = createContext();

@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
 
-axios.defaults.baseURL = "https://ecommerce-web-012.onrender.com";
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 axios.defaults.withCredentials = true;
 
 const ProductContext = createContext();
