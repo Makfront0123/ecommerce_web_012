@@ -13,7 +13,7 @@ import SearchProducts from "./SearchProducts";
 import { useAuth } from "@/hooks/useAuth";
 
 const Header = () => {
-  const { isAuthenticated} = useAuth();
+    const { isAuthenticated } = useAuth();
     const { items } = UseCart();
     const { itemsFavorite } = UseFavorite();
     const [loading, setLoading] = useState(false);
