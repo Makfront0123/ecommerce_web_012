@@ -17,30 +17,30 @@ import { useRouter } from 'next/navigation';
 import { useGlobalContext } from '@/context/globalContext';
 import DialogLoading from '@/components/DialogLoading';
 const CarouselToday = ({ product }: { product: ProductType[] }) => {
-  return (
-    <div className="w-screen max-w-full overflow-x-hidden">
-      <Carousel
-        opts={{
-          align: "start", // que los items comiencen desde el borde izquierdo
-          containScroll: "trimSnaps",
-        }}
-        className="w-full"
-      >
-        <CarouselContent className="flex gap-4 px-4">
-          {product.map((product: ProductType) => (
-            <CarouselItem
-              key={product._id}
-              className="flex-none w-[250px] md:w-[300px] lg:w-[350px]"
+    return (
+        <div className="w-screen max-w-full overflow-x-hidden">
+            <Carousel
+                opts={{
+                    align: "start", // que los items comiencen desde el borde izquierdo
+                    containScroll: "trimSnaps",
+                }}
+                className="w-full"
             >
-              <CardUtil product={product} />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-    </div>
-  );
+                <CarouselContent className="flex gap-4 px-4">
+                    {product.map((product: ProductType) => (
+                        <CarouselItem
+                            key={product._id}
+                            className="flex-none w-[250px] md:w-[300px] lg:w-[350px]"
+                        >
+                            <CardUtil product={product} />
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+            </Carousel>
+        </div>
+    );
 };
 
 
@@ -89,7 +89,7 @@ const CardUtil = ({ product }: { product: ProductType }) => {
 
                         {product.flashSale && product.discount > 0 && (
                             <div className="absolute -top-1 -left-2 py-1 px-4 bg-red-600 m-5 z-20">
-                                <span className='text-white font-bold'>-{product?.discount * 100}%</span>
+                                <span className='text-white font-bold'>-{product?.discount}%</span>
                             </div>
                         )}
                         <div className="absolute top-4 right-3 flex flex-col gap-y-4 z-20">
@@ -138,11 +138,12 @@ const CardUtil = ({ product }: { product: ProductType }) => {
                 <div className="mt-5">
                     <span className='font-bold' >{product.name}</span>
                     <div className="flex mt-3 gap-x-3">
-                        <span className='font-bold text-red-600'>${product.price}</span>
-                        {
-                            product.flashSale && <s className='font-bold text-gray-500'>${product.price - (product.price * product.discount)}</s>
-                        }
+                        <span className='font-bold text-red-600'>${(product.price * (1 - product.discount / 100)).toFixed(2)}</span>
+                        {product.flashSale && product.discount > 0 && (
+                            <s className='font-bold text-gray-500'>${product.price.toFixed(2)}</s>
+                        )}
                     </div>
+
                 </div>
             </div>
             {loading && <DialogLoading />}
