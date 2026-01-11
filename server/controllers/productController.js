@@ -1,6 +1,5 @@
 import asyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
-import Category from '../models/categoryModel.js';
 import mongoose from 'mongoose';
 
 export const createProduct = asyncHandler(async (req, res) => {
@@ -25,10 +24,13 @@ export const createProduct = asyncHandler(async (req, res) => {
         if (isActive === undefined) return res.status(400).json({ message: "IsActive is required" });
         if (quantity === undefined) return res.status(400).json({ message: "Quantity is required" });
 
-        // ✅ VALIDAR OBJECT ID
         if (!mongoose.Types.ObjectId.isValid(category)) {
             return res.status(400).json({ message: "Invalid category ID" });
         }
+        if (discount < 0 || discount > 100) {
+            return res.status(400).json({ message: "Discount must be between 0 and 100" });
+        }
+
 
         const product = await Product.create({
             name,
@@ -42,16 +44,27 @@ export const createProduct = asyncHandler(async (req, res) => {
             discount,
         });
 
-        return res.status(201).json(product);
+        return res.status(201).json({
+            ...product.toObject(),
+            finalPrice: product.getPriceAfterDiscount(),
+        });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Error creating product" });
     }
 });
+
+
 export const allProducts = asyncHandler(async (req, res) => {
     try {
         const products = await Product.find();
-        return res.status(200).json(products);
+
+        const productsWithFinalPrice = products.map(p => ({
+            ...p.toObject(),
+            finalPrice: p.getPriceAfterDiscount(),
+        }));
+
+        return res.status(200).json(productsWithFinalPrice);
     } catch (error) {
         return res.status(500).json(error);
     }
@@ -59,20 +72,23 @@ export const allProducts = asyncHandler(async (req, res) => {
 
 export const getProductDiscount = asyncHandler(async (req, res) => {
     try {
-        const discountProduct = await Product.find({
-            flashSale: true,
-        });
+        const discountProducts = await Product.find({ flashSale: true });
 
-        if (!discountProduct || discountProduct.length === 0) {
-            return res.status(404).json({
-                message: 'No products found for flash sale',
-            });
+        if (!discountProducts || discountProducts.length === 0) {
+            return res.status(404).json({ message: 'No products found for flash sale' });
         }
-        return res.status(200).json(discountProduct);
+
+        const productsWithFinalPrice = discountProducts.map(p => ({
+            ...p.toObject(),
+            finalPrice: p.getPriceAfterDiscount(),
+        }));
+
+        return res.status(200).json(productsWithFinalPrice);
     } catch (error) {
         return res.status(500).json(error);
     }
 });
+
 
 export const getProduct = asyncHandler(async (req, res) => {
     try {
