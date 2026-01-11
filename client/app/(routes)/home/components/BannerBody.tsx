@@ -3,9 +3,9 @@ import React from 'react'
 import Image from 'next/image'
 const BannerBody = () => {
     return (
-        <div className="relative w-full">
-            <Image src="/banner_experience.webp" className='object-cover sm:max-w-7xl w-full sm:min-h-[77vh] md:min-h-[60vh] min-h-[80vh]'  alt="" width={1920} height={1080} />
-            <div className="absolute sm:bottom-[6%] bottom-[0%]  md:left-[5%]  right-0">
+        <div className="relative w-full flex flex-col items-center justify-center">
+            <Image src="/banner_experience.webp" className='object-cover rounded-xl shadow-lg sm:max-w-7xl w-full sm:min-h-[77vh] md:min-h-[60vh] min-h-[80vh]'  alt="" width={2020} height={1080} />
+            <div className="absolute sm:bottom-[6%] bottom-[0%]  md:left-[12%]  right-0">
                 <TimerRegression
                    
                 />

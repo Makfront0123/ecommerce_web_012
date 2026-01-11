@@ -19,7 +19,7 @@ export const ProductContextProvider = ({ children }) => {
     const getProducts = async () => {
         setLoading(true)
         try {
-            const response = await axios.get(`/api/v1/all-products`)
+            const response = await axios.get(`/api/v1/products`)
             setProducts(response.data)
         } catch (error) {
 
@@ -36,7 +36,7 @@ export const ProductContextProvider = ({ children }) => {
         setLoading(true)
         try {
 
-            const response = await axios.get(`/api/v1/product-category/${id}`)
+            const response = await axios.get(`/api/v1/products/category/${id}`)
             setCatProduct(response.data)
             setLoading(false)
         } catch (error) {
@@ -51,7 +51,7 @@ export const ProductContextProvider = ({ children }) => {
         setLoading(true)
         try {
 
-            const response = await axios.get(`/api/v1/product/${id}`)
+            const response = await axios.get(`/api/v1/products/${id}`)
             setProduct(response.data)
             setLoading(false)
         } catch (error) {

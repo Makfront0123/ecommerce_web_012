@@ -34,17 +34,10 @@ export const registerUser = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
-    const tokenVerify = req.cookies.token || req.header('Authorization')?.replace('Bearer ', '');
-    if (tokenVerify) {
-        return res.status(401).json({ message: 'Already logged in' });
-    }
     const { email, password } = req.body;
 
-    if (!email) {
-        return res.status(400).json({ message: 'Email is required' });
-    }
-    if (!password) {
-        return res.status(400).json({ message: 'Password is required' });
+    if (!email || !password) {
+        return res.status(400).json({ message: 'Email and password are required' });
     }
 
     const user = await User.findOne({ email });
@@ -53,20 +46,37 @@ export const loginUser = async (req, res) => {
         return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    const secret = `${process.env.JWT_SECRET}`;
+    const token = jwt.sign(
+        { userId: user._id },
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' }
+    );
 
-    const payload = { userId: user._id };
-    const token = jwt.sign(payload, secret, { expiresIn: '1h' });
+    const isProd = process.env.NODE_ENV === "production";
 
-    res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'None', });
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: isProd,
+        sameSite: isProd ? "None" : "Lax",
+        path: "/api",
+    });
 
-    res.json({ message: 'Logged in successfully' });
+
+    res.json({ message: 'Logged in successfully', user });
 };
+
 
 export const logoutUser = (req, res) => {
-    res.clearCookie('token', { httpOnly: true, secure: true,sameSite: 'None', });
-    res.json({ message: 'Logged out successfully' });
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+        path: "/api",
+    });
+
+    res.json({ message: "Logged out successfully" });
 };
+
 
 export const getUserProfile = async (req, res) => {
     const { id: _id } = req.params;

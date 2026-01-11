@@ -11,22 +11,16 @@ router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.post('/logout', logoutUser);
 
-
 router.get('/check-auth', checkAuth, (req, res) => {
-
     res.json({
         isAuthenticated: true,
         user: req.user
     });
-
 });
 
-
-
-router.get('/profile/:id',  getUserProfile);
-router.get('/all-users',adminAuth,verifyToken, getAllUsers);
-router.delete('/user/:id', adminAuth,verifyToken, deleteUser);
-router.put('/user/:id', checkAuth, verifyToken,editUser);
+router.get('/all-users', checkAuth, adminAuth, getAllUsers);
+router.delete('/user/:id', checkAuth, adminAuth, deleteUser);
+router.put('/user/:id', checkAuth, editUser);
 
 
 export default router;

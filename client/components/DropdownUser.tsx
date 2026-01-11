@@ -13,15 +13,13 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Image from "next/image"
-import { useGlobalContext } from "@/context/globalContext"
+import { useAuth } from "@/hooks/useAuth"
 
 
 
 export function DropdownUser() {
-    const { userProfile, logout, } = useGlobalContext();
-    const { name, _id } = userProfile || ''
+    const { user, logout } = useAuth()
     const router = useRouter()
-
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -30,7 +28,7 @@ export function DropdownUser() {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 flex flex-col gap-y-2">
-                <DropdownMenuLabel>{`HOLA ${name}!`}</DropdownMenuLabel>
+                <DropdownMenuLabel>{`HOLA ${user?.name}!`}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <div className="flex flex-col gap-y-4">
                     <DropdownMenuItem
@@ -45,7 +43,7 @@ export function DropdownUser() {
                     </DropdownMenuItem>
                     <DropdownMenuItem
                         onClick={async () => {
-                            router.push(`/profile/${_id}`)
+                            router.push(`/profile/${user?._id}`)
                         }}
                     >
                         <div className="flex items-center gap-x-4 cursor-pointer hover:opacity-50 duration-200">

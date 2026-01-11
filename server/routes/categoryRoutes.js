@@ -5,17 +5,17 @@ const router = express.Router();
 
 
 //CREAR CATEGORIA
-router.post('/create-category', createCategory);
+router.post('/', createCategory);
 
 //MOSTRAR TODOS LAS CATEGORIAS
-router.get('/all-categories', allCategories);
+router.get('/', allCategories);
 
 //MOSTRAR UNA CATEGORIA POR ID
-router.get('/category/:id', getCategory);
+router.get('/:id', getCategory);
 
 //EDITAR UNA CATEGORIA
-router.put('/category/:id', adminAuth, editCategory);
+router.put('/:id',editCategory);
 
 //ELIMINAR UNA CATEGORIA
-router.delete('/category/:id', adminAuth, deleteCategory);
+router.delete('/:id', deleteCategory);
 export default router;

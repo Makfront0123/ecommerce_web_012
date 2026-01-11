@@ -20,16 +20,18 @@ import DialogLoading from '@/components/DialogLoading';
 const CarouselToday = ({ product }: { product: ProductType[] }) => {
 
     return (
+
         <Carousel
             opts={{
-                align: "start",
+                align: "center",
             }}
             className="w-full"
         >
             <CarouselContent className='flex'>
                 {product.map((product: ProductType) => {
                     return (
-                        <CarouselItem key={product._id} className="lg:basis-1/4 basis-3/5">
+                        <CarouselItem key={product._id} className="lg:basis-1/3 md:basis-1/2 basis-4/5">
+
                             <div className="p-1">
                                 <CardUtil product={product} />
                             </div>
@@ -40,6 +42,7 @@ const CarouselToday = ({ product }: { product: ProductType[] }) => {
             <CarouselPrevious />
             <CarouselNext />
         </Carousel>
+
     );
 };
 
@@ -84,7 +87,8 @@ const CardUtil = ({ product }: { product: ProductType }) => {
         <>
             <div className="flex flex-col">
                 <Card className='border-none group'>
-                    <div className="relative overflow-hidden aspect-square bg-gray-300 border-none">
+                    <div className="relative overflow-hidden aspect-square border-none">
+
                         {product.flashSale && product.discount > 0 && (
                             <div className="absolute -top-1 -left-2 py-1 px-4 rounded-lg bg-red-600 m-5 z-20">
                                 <span className='text-white font-bold'>-{product?.discount * 100}%</span>
@@ -114,7 +118,14 @@ const CardUtil = ({ product }: { product: ProductType }) => {
 
 
                         </div>
-                        <Image src={product.image} alt={product.name} className=" object-contain p-10" width={500} height={500} />
+                        <Image
+                            src={product.image}
+                            alt={product.name}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 33vw"
+                            className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                        />
+
                         <CardContent onClick={() => {
                             if (isAuthenticated) {
                                 addItem(product)

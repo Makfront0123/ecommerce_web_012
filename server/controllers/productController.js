@@ -1,34 +1,11 @@
 import asyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
 import Category from '../models/categoryModel.js';
+import mongoose from 'mongoose';
 
 export const createProduct = asyncHandler(async (req, res) => {
     try {
-        const { name, description, price, image, quantity, category, isActive, flashSale, discount } = req.body;
-        if (!name) {
-            return res.status(400).json({ message: "Name is required" });
-        }
-        if (!description) {
-            return res.status(400).json({ message: "Description is required" });
-        }
-        if (!price) {
-            return res.status(400).json({ message: "Price is required" });
-        }
-        if (!image) {
-            return res.status(400).json({ message: "Image is required" });
-        }
-        if (!category) {
-            return res.status(400).json({ message: "Category is required" });
-        }
-        if (!isActive) {
-            return res.status(400).json({ message: "IsActive is required" });
-        }
-        if (!quantity) {
-            return res.status(400).json({ message: "Quantity is required" });
-        }
-
-
-        const product = new Product({
+        const {
             name,
             description,
             price,
@@ -36,16 +13,41 @@ export const createProduct = asyncHandler(async (req, res) => {
             quantity,
             category,
             isActive,
-            flashSale: flashSale !== undefined ? flashSale : undefined,
-            discount: discount !== undefined ? discount : undefined,
+            flashSale = false,
+            discount = 0,
+        } = req.body;
+
+        if (!name) return res.status(400).json({ message: "Name is required" });
+        if (!description) return res.status(400).json({ message: "Description is required" });
+        if (price === undefined) return res.status(400).json({ message: "Price is required" });
+        if (!image) return res.status(400).json({ message: "Image is required" });
+        if (!category) return res.status(400).json({ message: "Category is required" });
+        if (isActive === undefined) return res.status(400).json({ message: "IsActive is required" });
+        if (quantity === undefined) return res.status(400).json({ message: "Quantity is required" });
+
+        // ✅ VALIDAR OBJECT ID
+        if (!mongoose.Types.ObjectId.isValid(category)) {
+            return res.status(400).json({ message: "Invalid category ID" });
+        }
+
+        const product = await Product.create({
+            name,
+            description,
+            price,
+            image,
+            quantity,
+            category,
+            isActive,
+            flashSale,
+            discount,
         });
-        await product.save();
+
         return res.status(201).json(product);
     } catch (error) {
-        return res.status(500).json(error);
+        console.error(error);
+        return res.status(500).json({ message: "Error creating product" });
     }
 });
-
 export const allProducts = asyncHandler(async (req, res) => {
     try {
         const products = await Product.find();
@@ -124,7 +126,7 @@ export const searchProduct = asyncHandler(async (req, res) => {
 
         console.log(name, category)
 
-        
+
         if (name) query.name = { $regex: name, $options: 'i' };
 
 
@@ -148,19 +150,19 @@ export const searchProduct = asyncHandler(async (req, res) => {
         return res.status(500).json(error);
     }
 });
-
-
 export const getProductByCategory = asyncHandler(async (req, res) => {
-    try {
-        const { category } = req.params;
-        const products = await Product.find({ category: category });
-        return res.status(200).json(products);
-    } catch (error) {
-        return res.status(500).json(error);
+    const { categoryId } = req.params;
+
+    const products = await Product.find({
+        category: categoryId,
+    });
+
+    if (!products.length) {
+        return res.status(404).json({ message: "No products found for this category" });
     }
+
+    res.status(200).json(products);
 });
-
-
 export const rateProduct = asyncHandler(async (req, res) => {
     const { productId } = req.params
     const { rating } = req.body

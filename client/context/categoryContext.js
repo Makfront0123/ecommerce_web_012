@@ -18,7 +18,7 @@ export const CategoryContextProvider = ({ children }) => {
     const getCategories = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('/api/v1/all-categories');
+            const response = await axios.get('/api/v1/categories');
             if (Array.isArray(response.data)) {
                 setCategories(response.data);
             } else {
@@ -35,7 +35,7 @@ export const CategoryContextProvider = ({ children }) => {
     const getCategoryById = async (categoryId) => {
         setLoading(true);
         try {
-            const response = await axios.get(`/api/v1/category/${categoryId}`);
+            const response = await axios.get(`/api/v1/categories/${categoryId}`);
             setCategoryById(response.data);
             setLoading(false);
         } catch (error) {

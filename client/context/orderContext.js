@@ -18,7 +18,7 @@ export const OrderContextProvider = ({ children }) => {
     const getOrders = async () => {
         setLoading(true)
         try {
-            const response = await axios.get('/api/v1/all-orders')
+            const response = await axios.get('/api/v1/orders')
             setOrders(response.data)
 
             setLoading(false)
@@ -33,7 +33,7 @@ export const OrderContextProvider = ({ children }) => {
     const createOrder = async (orderData) => {
         setLoading(true)
         try {
-            const response = await axios.post(`/api/v1/create-order`, orderData)
+            const response = await axios.post(`/api/v1/orders`, orderData)
             toast.success('Order created successfully')
             setOrders(response.data)
             setLoading(false)
@@ -48,7 +48,7 @@ export const OrderContextProvider = ({ children }) => {
     const editOrder = async (id) => {
         setLoading(true)
         try {
-            const response = await axios.put(`/api/v1/order/${id}`)
+            const response = await axios.put(`/api/v1/orders/${id}`)
             toast.success('Order updated successfully')
             setOrders(response.data)
             setLoading(false)
@@ -61,7 +61,7 @@ export const OrderContextProvider = ({ children }) => {
     const deleteOrder = async (id) => {
         setLoading(true)
         try {
-            const response = await axios.delete(`/api/v1/order/${id}`)
+            const response = await axios.delete(`/api/v1/orders/${id}`)
             toast.success('Order deleted successfully')
             setOrders(response.data)
             setLoading(false)
@@ -74,7 +74,7 @@ export const OrderContextProvider = ({ children }) => {
     const getOrderById = async (id) => {
         setLoading(true)
         try {
-            const response = await axios.get(`/api/v1/order/${id}`)
+            const response = await axios.get(`/api/v1/orders/${id}`)
             setOrders(response.data)
             setLoading(false)
         } catch (error) {
