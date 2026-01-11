@@ -8,7 +8,6 @@ import { Icon } from "@iconify/react";
 import { DropdownUser } from "./DropdownUser";
 import MenuMobile from "./MenuMobile";
 import { navLinks } from "@/models/models";
-import { useGlobalContext } from "@/context/globalContext";
 import Link from "next/link";
 import SearchProducts from "./SearchProducts";
 import { useAuth } from "@/hooks/useAuth";

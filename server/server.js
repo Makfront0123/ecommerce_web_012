@@ -43,5 +43,3 @@ const server = async () => {
 };
 
 server();
-
-/*=mongodb+srv://jakex:VmZSnVzLmATIILXZ@ecommercenode.js8t3.mongodb.net/ecommercenode?retryWrites=true&w=majority&appName=ecommercenode */
