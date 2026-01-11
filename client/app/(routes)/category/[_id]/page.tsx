@@ -1,6 +1,5 @@
 "use client"
 import { useProductContext } from '@/context/productContext';
-import React from 'react';
 import { SkeletonCard } from '../../product/components/SkeletonProduct';
 import { CardUtil } from '../components/CardUtils';
 

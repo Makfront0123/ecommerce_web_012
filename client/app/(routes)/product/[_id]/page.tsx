@@ -50,14 +50,20 @@ const DetailsProduct = () => {
       </div>
       <div className="grid md:grid-cols-12 min-h-[80vh] w-full h-full gap-5 mt-10 " >
 
-        <div className="col-span-6  bg-gray-100 flex items-center justify-center rounded-lg  ">
-
+        <div className="col-span-6 bg-gray-100 flex items-center justify-center rounded-lg shadow-lg relative h-[60vh] md:h-[70vh]">
           {product?.image ? (
-            <Image src={product.image} className="object-cover size-[50vh]  rounded-lg" alt={product.name} width={300} height={300} />
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              className="object-cover rounded-lg"
+              priority
+            />
           ) : (
             <div>Imagen no disponible</div>
           )}
         </div>
+
         <div className=" bg-white col-span-6 flex flex-col">
           <h6 className='text-3xl font-bold mb-5'>{product?.name}</h6>
           {

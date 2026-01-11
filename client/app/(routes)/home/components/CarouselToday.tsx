@@ -16,35 +16,33 @@ import { UseFavorite } from '@/hooks/useFavorite';
 import { useRouter } from 'next/navigation';
 import { useGlobalContext } from '@/context/globalContext';
 import DialogLoading from '@/components/DialogLoading';
-
 const CarouselToday = ({ product }: { product: ProductType[] }) => {
-
-    return (
-
-        <Carousel
-            opts={{
-                align: "center",
-            }}
-            className="w-full"
-        >
-            <CarouselContent className='flex'>
-                {product.map((product: ProductType) => {
-                    return (
-                        <CarouselItem key={product._id} className="lg:basis-1/3 md:basis-1/2 basis-4/5">
-
-                            <div className="p-1">
-                                <CardUtil product={product} />
-                            </div>
-                        </CarouselItem>
-                    );
-                })}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-        </Carousel>
-
-    );
+  return (
+    <div className="w-screen max-w-full overflow-x-hidden">
+      <Carousel
+        opts={{
+          align: "start", // que los items comiencen desde el borde izquierdo
+          containScroll: "trimSnaps",
+        }}
+        className="w-full"
+      >
+        <CarouselContent className="flex gap-4 px-4">
+          {product.map((product: ProductType) => (
+            <CarouselItem
+              key={product._id}
+              className="flex-none w-[250px] md:w-[300px] lg:w-[350px]"
+            >
+              <CardUtil product={product} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+    </div>
+  );
 };
+
 
 export default CarouselToday;
 
@@ -87,10 +85,10 @@ const CardUtil = ({ product }: { product: ProductType }) => {
         <>
             <div className="flex flex-col">
                 <Card className='border-none group'>
-                    <div className="relative overflow-hidden aspect-square border-none">
+                    <div className="relative overflow-hidden aspect-square border-none rounded-lg shadow-lg">
 
                         {product.flashSale && product.discount > 0 && (
-                            <div className="absolute -top-1 -left-2 py-1 px-4 rounded-lg bg-red-600 m-5 z-20">
+                            <div className="absolute -top-1 -left-2 py-1 px-4 bg-red-600 m-5 z-20">
                                 <span className='text-white font-bold'>-{product?.discount * 100}%</span>
                             </div>
                         )}
