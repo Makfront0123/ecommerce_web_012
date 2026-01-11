@@ -31,7 +31,7 @@ export const GlobalContextProvider = ({ children }) => {
                 toast.error("Invalid email");
                 return;
             }
-            const response = await axios.post(`/api/v1/login`, { email, password });
+            const response = await axios.post(`/api/v1/auth/login`, { email, password });
             setUser(response.data.user);
             setIsAuthenticated(true);
 
@@ -64,7 +64,7 @@ export const GlobalContextProvider = ({ children }) => {
                 toast.error("Invalid email");
                 return;
             }
-            await axios.post(`/api/v1/register`, { name, email, password });
+            await axios.post(`/api/v1/auth/register`, { name, email, password });
             router.push('/login')
         } catch (error) {
             console.error(error);
@@ -80,7 +80,7 @@ export const GlobalContextProvider = ({ children }) => {
 
     const logout = async () => {
         try {
-            await axios.post(`/api/v1/logout`);
+            await axios.post(`/api/v1/auth/logout`);
             setIsAuthenticated(false);
             setUser(null);
             setUserProfile(null);
@@ -96,15 +96,13 @@ export const GlobalContextProvider = ({ children }) => {
 
 
     const checkAuth = async () => {
-        setLoading(true);
         try {
-            const response = await axios.get(`/api/v1/check-auth`);
-            setIsAuthenticated(response.data.isAuthenticated);
-            setUser(response.data.user);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
+            const res = await axios.get("/api/v1/auth/check-auth");
+            setIsAuthenticated(true);
+            setUser(res.data.user);
+        } catch {
+            setIsAuthenticated(false);
+            setUser(null);
         }
     };
 
@@ -131,39 +129,39 @@ export const GlobalContextProvider = ({ children }) => {
     ) => {
         setLoading(true);
         try {
-        
+
             if (!name && !email && !currentPassword && !password && !confirmPassword) {
                 throw new Error('At least one field must be updated');
             }
-    
+
             const data = {};
-    
-        
+
+
             if (name) data.name = name;
-            
-        
+
+
             if (email) data.email = email;
-    
-           
+
+
             if (currentPassword && password && confirmPassword) {
-                
+
                 if (password !== confirmPassword) {
                     throw new Error('Passwords do not match');
                 }
-    
-                
+
+
                 data.currentPassword = currentPassword;
                 data.password = password;
                 data.confirmPassword = confirmPassword;
             }
-    
-           
+
+
             const response = await axios.put(`/api/v1/user/${user._id}`, data);
-            
+
             if (response.status === 200) {
                 toast.success('Profile updated successfully');
-    
-               
+
+
                 if (name) {
                     setUser((prevUser) => ({ ...prevUser, name }));
                 }
@@ -173,14 +171,14 @@ export const GlobalContextProvider = ({ children }) => {
             }
         } catch (error) {
             console.error(error);
-    
-          
+
+
             toast.error(error?.response?.data?.message || error.message || 'Error updating profile');
         } finally {
             setLoading(false);
         }
     };
-    
+
 
 
 
@@ -190,11 +188,6 @@ export const GlobalContextProvider = ({ children }) => {
 
     }, []);
 
-    useEffect(() => {
-        if (isAuthenticated && user) {
-            getUserProfile(user._id);
-        }
-    }, [isAuthenticated, user]);
 
 
 

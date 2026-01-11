@@ -2,8 +2,21 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+
   images: {
-    domains: ['*'],
+    domains: [
+      "images.unsplash.com",
+      "plus.unsplash.com"
+    ],
+  },
+
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "http://localhost:8000/api/:path*",
+      },
+    ];
   },
 };
 

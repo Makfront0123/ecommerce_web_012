@@ -3,10 +3,16 @@ import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 export const useAuth = () => {
     const router = useRouter()
-    const { isAuthenticated } = useGlobalContext()
+    const { isAuthenticated, user,logout } = useGlobalContext()
     useEffect(() => {
         if (isAuthenticated) {
             router.push('/')
         }
-    }, [isAuthenticated,router])
+    }, [isAuthenticated, router])
+
+    return {
+        isAuthenticated,
+        user,
+        logout
+    }
 }

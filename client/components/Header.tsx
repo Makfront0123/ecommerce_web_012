@@ -11,15 +11,15 @@ import { navLinks } from "@/models/models";
 import { useGlobalContext } from "@/context/globalContext";
 import Link from "next/link";
 import SearchProducts from "./SearchProducts";
+import { useAuth } from "@/hooks/useAuth";
 
 const Header = () => {
-    const { isAuthenticated } = useGlobalContext();
+  const { isAuthenticated} = useAuth();
     const { items } = UseCart();
     const { itemsFavorite } = UseFavorite();
     const [loading, setLoading] = useState(false);
 
     const router = useRouter();
-
 
 
     const handleLinkClick = useCallback((href: string) => {
@@ -77,7 +77,7 @@ const Header = () => {
                     <MenuMobile />
                 </div>
                 <div className="flex items-center sm:gap-x-8 gap-x-4">
-                    <SearchProducts/>
+                    <SearchProducts />
                     <Link
                         href={`${isAuthenticated ? "/wishlist" : "/login"}`}
                         onClick={(e) => {

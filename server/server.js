@@ -3,7 +3,10 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import connectDB from './db/connect.js';
-import fs from 'fs';
+import categoryRoutes from './routes/categoryRoutes.js';
+import productRoutes from './routes/productRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 dotenv.config();
 
 const app = express();
@@ -19,15 +22,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 
-const routeFiles = fs.readdirSync('./routes');
-
-routeFiles.forEach((file) => {
-    import(`./routes/${file}`).then((route) => {
-        app.use("/api/v1/", route.default);
-    }).catch((error) => {
-        console.log(error);
-    });
-});
+app.use('/api/v1/categories', categoryRoutes);
+app.use('/api/v1/products', productRoutes);
+app.use('/api/v1/orders', orderRoutes);
+app.use('/api/v1/auth', authRoutes);
 
 
 
@@ -45,3 +43,5 @@ const server = async () => {
 };
 
 server();
+
+/*=mongodb+srv://jakex:VmZSnVzLmATIILXZ@ecommercenode.js8t3.mongodb.net/ecommercenode?retryWrites=true&w=majority&appName=ecommercenode */

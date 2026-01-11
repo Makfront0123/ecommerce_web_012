@@ -5,17 +5,17 @@ import { checkAuth } from '../middleware/checkAuth.js';
 const router = express.Router();
 
 //CREAR ORDEN
-router.post('/create-order', checkAuth, createOrder);
+router.post('/', checkAuth, createOrder);
 
 //MOSTRAR TODOS LOS ORDENES
-router.get('/all-orders', adminAuth, allOrders);
+router.get('/', adminAuth, allOrders);
 
 //MOSTRAR UN ORDEN POR ID
-router.get('/order/:id', checkAuth, getOrder);
+router.get('/:id', checkAuth, getOrder);
 
 //EDITAR UN ORDEN
-router.put('/order/:id', checkAuth, editOrder);
+router.put('/:id', checkAuth, editOrder);
 
 //ELIMINAR UN ORDEN
-router.delete('/order/:id', checkAuth, deleteOrder);
+router.delete('/:id', checkAuth, deleteOrder);
 export default router;
