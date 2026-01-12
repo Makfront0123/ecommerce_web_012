@@ -17,10 +17,7 @@ router.get('/check-auth', checkAuth, (req, res) => {
         user: req.user
     });
 });
-
-router.get('/all-users', checkAuth, adminAuth, getAllUsers);
-router.delete('/user/:id', checkAuth, adminAuth, deleteUser);
-router.put('/user/:id', checkAuth, editUser);
+ 
 
 
 export default router;

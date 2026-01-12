@@ -1,7 +1,8 @@
 "use client"
 import { useProductContext } from '@/context/productContext';
 import { SkeletonCard } from '../../product/components/SkeletonProduct';
-import { CardUtil } from '../components/CardUtils';
+import CardUtil from '../../home/components/CardUtil';
+
 
 
 const Category = () => {

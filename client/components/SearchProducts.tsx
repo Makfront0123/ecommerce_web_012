@@ -15,6 +15,7 @@ import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 
 import DialogLoading from './DialogLoading';
+import { CardSearchProduct } from './CardSearchProduct';
 
 const SearchProducts: React.FC = () => {
     const { products, searchProducts, loading } = useProductContext();
@@ -53,7 +54,7 @@ const SearchProducts: React.FC = () => {
                     {products.length > 0 ? (
                         <div className="flex flex-col gap-y-10">
                             {products.map((product: ProductType) => (
-                                <CardUtil key={product._id} product={product} setSearchLoad={setSearchLoad} />
+                                <CardSearchProduct key={product._id} product={product} setSearchLoad={setSearchLoad} />
                             ))}
                         </div>
                     ) : (
@@ -68,90 +69,3 @@ const SearchProducts: React.FC = () => {
 export default SearchProducts;
 
 
-export const CardUtil = ({ product, setSearchLoad }: { product: ProductType, setSearchLoad: React.Dispatch<React.SetStateAction<boolean>> }) => {
-    const { addItem } = UseCart();
-    const { addFavorite, removeFavorite, itemsFavorite } = UseFavorite();
-    const [isFavorite, setIsFavorite] = useState(itemsFavorite.some((item) => item._id === product?._id));
-    const router = useRouter();
-    const { isAuthenticated } = useGlobalContext();
-
-    const handleFavoriteClick = () => {
-        if (isFavorite) {
-            removeFavorite(product._id);
-        } else {
-            addFavorite(product);
-        }
-
-        setIsFavorite(!isFavorite);
-    };
-
-    const handleLinkClick = (href: string) => {
-        setSearchLoad(true);
-        setTimeout(() => {
-            router.push(href);
-            setSearchLoad(false);
-        }, 2000);
-    };
-
-    if (product == null) {
-        return <div className="mt-10"><SkeletonCard /></div>;
-    }
-
-    const shortDescription = product?.description?.slice(0, 100);
-    return (
-        <div className="flex flex-col px-10 py-10">
-            <Card className="relative sm:max-w-[20vh] md:max-w-[100vh] lg:max-w-[100vh] max-w-[50vh]   border-none group flex md:flex-row flex-col gap-x-5">
-                <div className="relative max-w-[20rem] max-h-[20rem]">
-                    {product.flashSale && product.discount > 0 && (
-                        <div className="absolute -top-1 -left-2 py-1 px-4 rounded-lg bg-red-600 m-5 z-20">
-                            <span className="text-white font-bold">-{product?.discount * 100}%</span>
-                        </div>
-                    )}
-
-                    <Image src={product.image} alt={product.name} className="bg-gray-600 object-cover w-full  rounded-md p-10" width={200} height={200} />
-                </div>
-                <div className="mt-2 px-5 max-w-[20rem]">
-                    <span className="font-bold">{product.name}</span>
-                    <p className="text-[10px]">{shortDescription}</p>
-                    <div className="flex mt-3 gap-x-3">
-                        <span className="font-bold text-red-600">${product.price}</span>
-                        <s className="font-bold text-gray-500">${product.price - (product.price * product.discount)}</s>
-                    </div>
-                </div>
-
-                <div className="absolute top-2 right-3 flex flex-col gap-y-4 z-20">
-                    <Button className="px-1 py-1 rounded-full bg-white drop-shadow-md text-black" onClick={
-                        isAuthenticated ? handleFavoriteClick : () => handleLinkClick('/login')
-                    }>
-                        <Icon icon={isFavorite ? 'material-symbols:favorite-rounded' : 'material-symbols:favorite-outline-rounded'}
-                            className={isFavorite ? 'text-red-600' : 'text-gray-400'}
-                            width="24" height="24" />
-                    </Button>
-
-                    <Button
-                        onClick={() => {
-                            if (isAuthenticated) {
-                                router.push(`/product/${product?._id}`);
-                            } else {
-                                handleLinkClick('/login');
-                            }
-                        }}
-                        className="px-1 py-1 rounded-full bg-white drop-shadow-md text-black"
-                    >
-                        <Icon icon="ic:baseline-remove-red-eye" width="24" height="24" />
-                    </Button>
-                </div>
-
-                <CardContent onClick={() => {
-                    if (isAuthenticated) {
-                        addItem(product)
-                    } else {
-                        handleLinkClick('/login');
-                    }
-                }} className="group-hover:flex group-hover:animate-slide-out-top hidden cursor-pointer absolute bottom-0 hover:bg-gray-400 bg-black w-full hover:opacity-70 duration-400 transition-all  items-center justify-center p-3 text-center text-white">
-                    Add To Cart
-                </CardContent>
-            </Card>
-        </div>
-    );
-};

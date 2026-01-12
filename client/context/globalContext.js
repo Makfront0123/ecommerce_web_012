@@ -107,19 +107,6 @@ export const GlobalContextProvider = ({ children }) => {
     };
 
 
-
-
-
-    const getUserProfile = async (id) => {
-
-        try {
-            const response = await axios.get(`/api/v1/profile/${id}`);
-            setUserProfile(response.data);
-        } catch (error) {
-            console.error("Error al obtener el perfil:", error);
-        }
-    };
-
     const updateUserProfile = async (
         name,
         email,
@@ -129,51 +116,29 @@ export const GlobalContextProvider = ({ children }) => {
     ) => {
         setLoading(true);
         try {
-
-            if (!name && !email && !currentPassword && !password && !confirmPassword) {
-                throw new Error('At least one field must be updated');
-            }
-
             const data = {};
 
-
             if (name) data.name = name;
-
-
             if (email) data.email = email;
-
-
             if (currentPassword && password && confirmPassword) {
-
-                if (password !== confirmPassword) {
-                    throw new Error('Passwords do not match');
-                }
-
-
+                if (password !== confirmPassword) throw new Error("Passwords do not match");
                 data.currentPassword = currentPassword;
                 data.password = password;
                 data.confirmPassword = confirmPassword;
             }
 
 
-            const response = await axios.put(`/api/v1/user/${user._id}`, data);
+            const response = await axios.put(`/api/v1/user`, data);
 
             if (response.status === 200) {
-                toast.success('Profile updated successfully');
+                toast.success("Profile updated successfully");
 
 
-                if (name) {
-                    setUser((prevUser) => ({ ...prevUser, name }));
-                }
-                if (email) {
-                    setUser((prevUser) => ({ ...prevUser, email }));
-                }
+                if (name) setUser(prev => ({ ...prev, name }));
+                if (email) setUser(prev => ({ ...prev, email }));
             }
         } catch (error) {
-            console.error(error);
-
-
-            toast.error(error?.response?.data?.message || error.message || 'Error updating profile');
+            toast.error(error?.response?.data?.message || error.message || "Error updating profile");
         } finally {
             setLoading(false);
         }

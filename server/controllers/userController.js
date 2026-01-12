@@ -117,46 +117,26 @@ export const deleteUser = async (req, res) => {
 
     res.json({ message: 'User deleted successfully' });
 };
+
 export const editUser = async (req, res) => {
-    const { id } = req.params;
     const { name, email, password, confirmPassword, currentPassword } = req.body;
 
     try {
+        const userId = req.user._id;
 
-        if (!name && !email && !currentPassword && !password) {
-            return res.status(400).json({ message: 'At least one field must be updated' });
-        }
-
-        const user = await User.findById(id);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-
+        const user = await User.findById(userId);
+        if (!user) return res.status(404).json({ message: 'User not found' });
         if (currentPassword) {
             const isMatch = await user.matchPassword(currentPassword);
-            if (!isMatch) {
-                return res.status(400).json({ message: 'Current password is incorrect' });
-            }
+            if (!isMatch) return res.status(400).json({ message: 'Current password is incorrect' });
         }
-
-
         if (password) {
-            if (password !== confirmPassword) {
-                return res.status(400).json({ message: 'New password and confirm password do not match' });
-            }
-
+            if (password !== confirmPassword) return res.status(400).json({ message: 'Passwords do not match' });
             user.password = password;
         }
 
-        if (name) {
-            user.name = name;
-        }
-
-        if (email) {
-            user.email = email;
-        }
-
+        if (name) user.name = name;
+        if (email) user.email = email;
 
         await user.save();
 
@@ -170,13 +150,14 @@ export const editUser = async (req, res) => {
                 userType: user.userType,
                 dateJoined: user.dateJoined,
                 isActive: user.isActive,
-            }
+            },
         });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: error.message || 'Error updating profile' });
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
+
 
 
 
